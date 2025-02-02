@@ -4,3 +4,4 @@ resources:
   - deployment.yaml
   - namespace.yaml
   - linkding-pvc.yaml
+  - service.yaml
