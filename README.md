@@ -1,11 +1,11 @@
 # K8s Homelab 
 
-This repository is for my k8s Homelab cluster.I wil be following ‘The Twelve-Factor App’ principles and GitOps fundemantals.
+This repository is for my k8s Homelab cluster. I wil be following ‘The Twelve-Factor App’ principles and GitOps fundemantals.
 
 **Goal:** Create a production level cluster that enables me to explore and utilize DevOps tools and technologies while following best practices.
 ## Distribution 
 - I run a lightweight k8s distribution through k3s on a raspberry pi5.
-- Pi5 has limited compute so the distribution mets my needs 
+- Pi5 has limited compute so the distribution meets my needs 
 
 
 ## GitOps
