@@ -31,19 +31,8 @@ spec:
       ingress:
         enabled: true
         ingressClassName: traefik
-      ## Hostnames.
-      ## Must be provided if Ingress is enable.
-      ##
-      # hosts:
-      #   - grafana.domain.com
         hosts: 
-      - grafana.maurihomelab.net
-      ## Path for grafana ingress
-        path: /
-
-      ## TLS configuration for grafana Ingress
-      ## Secret must be manually created in the namespace
-      ##
+          - grafana.maurihomelab.net
         tls: []
       # - secretName: grafana-general-tls
       #   hosts:
