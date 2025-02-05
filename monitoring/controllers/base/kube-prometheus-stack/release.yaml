@@ -28,23 +28,23 @@ spec:
   values:
     grafana:
       adminPassword: letmein
-    ingress:
-      enabled: true
-      ingressClassName: traefik
+      ingress:
+        enabled: true
+        ingressClassName: traefik
       ## Hostnames.
       ## Must be provided if Ingress is enable.
       ##
       # hosts:
       #   - grafana.domain.com
-      hosts: 
+        hosts: 
       - grafana.maurihomelab.net
       ## Path for grafana ingress
-      path: /
+        path: /
 
       ## TLS configuration for grafana Ingress
       ## Secret must be manually created in the namespace
       ##
-      tls: []
+        tls: []
       # - secretName: grafana-general-tls
       #   hosts:
       #   - grafana.example.com
