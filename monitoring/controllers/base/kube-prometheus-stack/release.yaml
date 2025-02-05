@@ -27,7 +27,7 @@ spec:
           kind: PrometheusRule
   values:
     grafana:
-      adminPassword: passw0rd #initial setup password change after pod is up
+      adminPassword: mauri 
       ingress:
         enabled: true
         ingressClassName: traefik
