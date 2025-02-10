@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cert-manager
+      version: "v1.17.0" # version of cert-manager
+      sourceRef:
+        kind: HelmRepository
+        name: cert-manager
+        namespace: cert-manager
+      interval: 12h
+  install:
+    crds: Create 
+  upgrade:
+    crds: CreateReplace 
+  values:
+    namespace: cert-manager
+    installCRDs: true
+    extraArgs:
+      - --dns01-recursive-nameservers-only
+      - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
+    ingressShim:
+      defaultIssuerName: letsencrypt-prod
+      defaultIssuerKind: ClusterIssuer
