@@ -3,4 +3,5 @@ kind: Kustomization
 resources: 
   - namespace.yaml
   - cluster-issuer.yaml
-  - application.yaml
+  - chart.yaml
+  - values.yaml
