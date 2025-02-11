@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps
+  name: app-of-apps-staging
   namespace: argocd
 spec:
   project: default
   # Source of the application manifests
   source:
     repoURL: https://github.com/mauriquev/homelab
-    targetRevision: main
-    path: apps
+    targetRevision: HEAD
+    path: cluster/staging
    
   # Destination namespace to deploy the application  
   destination:
