@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://charts.jetstack.io
+    targetRevision: "v1.17.0"  # Cert-Manager version
+    chart: cert-manager
+    helm:
+      values: |
+        installCRDs: true
+        extraArgs:
+          - --dns01-recursive-nameservers-only
+          - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
+        ingressShim:
+          defaultIssuerName: letsencrypt-prod
+          defaultIssuerKind: ClusterIssuer
+  destination:
+    namespace: cert-manager
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
