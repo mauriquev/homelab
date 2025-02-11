@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/mauriquev/homelab
     targetRevision: HEAD
-    path: infrastructure/base/cert-manager 
+    path: ./infrastructure/base/cert-manager 
   destination:
     namespace: cert-manager
   syncPolicy:
