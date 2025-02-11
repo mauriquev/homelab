@@ -9,6 +9,16 @@ spec:
     repoURL: https://github.com/mauriquev/homelab
     targetRevision: HEAD
     path: ./infrastructure/base/cert-manager 
+     helm:
+      releaseName: cert-manager
+      values: |
+        cert-manager:
+          values:
+            crds:
+              enabled: true
+            extraArgs:
+              - --dns01-recursive-nameservers-only
+              - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
   destination:
     namespace: cert-manager
     name: in-cluster
