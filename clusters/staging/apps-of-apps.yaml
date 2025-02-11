@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/mauriquev/homelab
     targetRevision: HEAD
-    path: cluster/staging
+    path: clusters/staging
    
   # Destination namespace to deploy the application  
   destination:
