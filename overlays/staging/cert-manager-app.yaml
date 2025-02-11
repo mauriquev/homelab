@@ -11,6 +11,7 @@ spec:
     path: ./infrastructure/base/cert-manager 
   destination:
     namespace: cert-manager
+    name: in-cluster
   syncPolicy:
     automated:
       prune: true
