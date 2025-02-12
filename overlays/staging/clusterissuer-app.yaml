@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-issuer
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/your-org/your-repo.git
+    targetRevision: main
+    path: manifests/cert-manager
+  destination:
+    name: in-cluster
+    namespace: cert-manager
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

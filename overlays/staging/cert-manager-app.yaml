@@ -6,16 +6,22 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/mauriquev/homelab
-    targetRevision: HEAD
-    path: ./infrastructure/base/cert-manager
+    chart: cert-manager
+    repoURL: https://charts.jetstack.io  # Official cert-manager helm repo
+    targetRevision: v1.17.0
     helm:
-      releaseName: cert-manager
-      
+      values: |
+        namespace: cert-manager
+        crds:
+          enabled: true
+          - --dns01-recursive-nameservers-only
+          - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
   destination:
-    namespace: cert-manager
     name: in-cluster
+    namespace: cert-manager
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
