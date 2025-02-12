@@ -1,7 +1,23 @@
 apiVersion: v2
-name: cert-manager-setup
-version: 1.0.0  # This is your chart version
-dependencies:
-  - name: cert-manager
-    version: v1.17.0  # Use the latest stable version
-    repository: https://charts.jetstack.io
+
+name: cert-manager
+description: A Helm chart for cert-manager
+home: https://cert-manager.io
+icon: https://raw.githubusercontent.com/cert-manager/community/4d35a69437d21b76322157e6284be4cd64e6d2b7/logo/logo-small.png
+keywords:
+  - cert-manager
+  - kube-lego
+  - letsencrypt
+  - tls
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/category: security
+maintainers:
+  - name: cert-manager-maintainers
+    email: cert-manager-maintainers@googlegroups.com
+    url: https://cert-manager.io
+sources:
+  - https://github.com/cert-manager/cert-manager
+kubeVersion: ">= 1.22.0-0"
+version: 1.17.0
+appVersion: v1.17.0
