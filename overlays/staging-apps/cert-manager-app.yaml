@@ -4,8 +4,8 @@ metadata:
   name: cert-manager-helm
   namespace: argocd
 spec:
-[...]
   source:
+  project: default
     chart: cert-manager
     repoURL: https://charts.jetstack.io
     targetRevision: v1.17.0
