@@ -1,20 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: cert-manager-helm
   namespace: argocd
 spec:
   project: default
   source:
     chart: cert-manager
-    repoURL: https://charts.jetstack.io  # Official cert-manager Helm repo
+    repoURL: https://charts.jetstack.io
     targetRevision: v1.17.0
     helm:
-      values: |
+      valuesObject:
+        fullnameOverride: cert-manager
         installCRDs: true
         extraArgs:
-          - "--dns01-recursive-nameservers-only"
-          - "--dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53"
+          - --logging-format=json
+          - --dns01-recursive-nameservers-only
+          - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
   destination:
     name: in-cluster
     namespace: cert-manager
