@@ -4,17 +4,37 @@ metadata:
   name: cert-manager-helm
   namespace: argocd
 spec:
-  project: default
+[...]
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
     targetRevision: v1.17.0
     helm:
-      releaseName: cert-manager
-  destination:
-    name: in-cluster
-    namespace: cert-manager
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+      valuesObject:
+        fullnameOverride: cert-manager
+        installCRDs: true
+        # resources:
+        #   requests:
+        #     cpu: 75m
+        #     memory: 150Mi
+        #   limits:
+        #     cpu: 75m
+        #     memory: 150Mi
+        # podDisruptionBudget:
+        #   enabled: true
+
+        # prometheus:
+        #   servicemonitor:
+        #     enabled: false # true
+        #     labels:
+        #       prometheus.io/scrap-with: kube-prometheus-stack
+
+        extraArgs:
+          - --logging-format=json
+destination:
+  name: in-cluster
+  namespace: cert-manager
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
