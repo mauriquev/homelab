@@ -1,4 +1,4 @@
-nanespace: cert-manager
+namespace: cert-manager
 crds:
   enabled: true
 extraArgs:
