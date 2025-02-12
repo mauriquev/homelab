@@ -10,11 +10,11 @@ spec:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.17.0
     helm:
-      valuesObject:
+      values: |
         extraArgs:
-          - --logging-format=json
-          - --dns01-recursive-nameservers-only
-          - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
+          - "--logging-format=json"
+          - "--dns01-recursive-nameservers-only"
+          - "--dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53"
   destination:
     name: in-cluster
     namespace: cert-manager
