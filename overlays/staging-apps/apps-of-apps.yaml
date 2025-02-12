@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/mauriquev/homelab
     targetRevision: HEAD
-    path: overlays/staging-apps
+    path: ./overlays/staging-apps
    
   # Destination namespace to deploy the application  
   destination:
