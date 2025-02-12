@@ -11,8 +11,8 @@ spec:
     targetRevision: v1.17.0
     helm:
       valuesObject:
-        fullnameOverride: cert-manager
-        installCRDs: true
+        crds: 
+          enabled: true
         extraArgs:
           - --logging-format=json
           - --dns01-recursive-nameservers-only
