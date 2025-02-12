@@ -7,13 +7,12 @@ spec:
   project: default
   source:
     chart: cert-manager
-    repoURL: https://charts.jetstack.io  # Official cert-manager helm repo
+    repoURL: https://charts.jetstack.io  # Official cert-manager Helm repo
     targetRevision: v1.17.0
     helm:
       values: |
         installCRDs: true
-        crds:
-          enabled: true
+        extraArgs:
           - --dns01-recursive-nameservers-only
           - --dns01-recursive-nameservers=1.1.1.1:53,1.0.0.1:53
   destination:
@@ -23,4 +22,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  
