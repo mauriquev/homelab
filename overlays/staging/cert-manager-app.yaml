@@ -11,7 +11,6 @@ spec:
     targetRevision: v1.17.0
     helm:
       values: |
-        namespace: cert-manager
         crds:
           enabled: true
           - --dns01-recursive-nameservers-only
@@ -23,5 +22,4 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  
