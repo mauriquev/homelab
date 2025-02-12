@@ -12,6 +12,7 @@ spec:
     helm:
       values: |
         namespace: cert-manager
+        installCRDs: true
         crds:
           enabled: true
         extraArgs:
