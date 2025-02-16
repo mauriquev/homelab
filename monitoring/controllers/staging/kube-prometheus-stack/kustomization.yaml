@@ -1,4 +1,0 @@
-kind: Kustomization
-namespace: monitoring
-resources:
-  - ../../base/kube-prometheus-stack/

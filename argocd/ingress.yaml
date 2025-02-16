@@ -1,0 +1,57 @@
+# First create the HTTP to HTTPS redirect middleware
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+  namespace: argocd
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+
+---
+# HTTP IngressRoute to handle redirects
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-server-http
+  namespace: argocd
+spec:
+  entryPoints:
+    - web  # This is the HTTP entrypoint
+  routes:
+    - kind: Rule
+      match: Host(`argo.maurihomelab.net`)
+      middlewares:
+        - name: https-redirect
+      services:
+        - name: argocd-server
+          port: 80
+
+---
+# HTTPS IngressRoute for the actual service
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: argocd-server
+  namespace: argocd
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`argo.maurihomelab.net`)
+      services:
+        - name: argocd-server
+          port: 80
+          scheme: http
+    - kind: Rule
+      match: Host(`argo.maurihomelab.net`) && Headers(`Content-Type`, `application/grpc`)
+      services:
+        - name: argocd-server
+          port: 80
+          scheme: h2c
+  tls:
+    secretName: argocd-tls-secret
+
+  

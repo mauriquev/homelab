@@ -1,0 +1,15 @@
+# Ignore all files with 'secret' in the name
+*secret*
+
+# But ONLY allow files that START with 'sealed-secret'
+!sealed*
+
+# Optional: additional secret-related exclusions
+**/*.secret
+**/*.key
+**/*.pem
+
+# Ignore environment files
+.env
+*.env
+.env.*

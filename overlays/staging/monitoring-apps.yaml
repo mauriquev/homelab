@@ -1,22 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps-staging
+  name: infrastructure-monitoring
   namespace: argocd
 spec:
   project: default
-  # Source of the application manifests
   source:
     repoURL: https://github.com/mauriquev/homelab
+    path: monitoring/staging
     targetRevision: HEAD
-    path: ./overlays/staging-apps
-   
-  # Destination namespace to deploy the application  
   destination:
+    server: https://kubernetes.default.svc
     namespace: argocd
-    name: in-cluster
-  
-  # Sync policy
   syncPolicy:
     automated:
       prune: true

@@ -10,14 +10,13 @@ spec:
     repoURL: https://charts.jetstack.io
     targetRevision: v1.17.0
     helm:
-      values: |
-        installCRDs: true
+      valueFiles:
+        - values.yaml
   destination:
-    name: in-cluster
+    server: https://kubernetes.default.svc
     namespace: cert-manager
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+      prune: false
+      selfHeal: false
+   

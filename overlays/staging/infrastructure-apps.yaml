@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: staging-infrastructure
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mauriquev/homelab
+    targetRevision: HEAD
+    path: infrastructure/staging   # Points to the staging directory where your root kustomization.yaml is
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true       
+      selfHeal: true  
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
