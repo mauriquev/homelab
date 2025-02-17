@@ -14,7 +14,7 @@ spec:
     chart: kube-prometheus-stack
     helm:
       valueFiles:
-        - monitoring/base/kube-prometheus-stack/values.yaml 
+        - ./values.yaml 
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 69.0.0
   syncPolicy:
