@@ -16,4 +16,9 @@ spec:
     automated:
       prune: true  # Be cautious with pruning for critical components
       selfHeal: true
+  ignoreDifferences:
+    - group: "*"
+      kind: "*"
+      jqPathExpressions:
+        - .metadata.annotations
     
