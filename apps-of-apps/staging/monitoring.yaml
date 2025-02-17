@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring-stack
+  name: monitoring
   namespace: argocd
 spec:
   project: default
@@ -13,10 +13,8 @@ spec:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
-    # automated:
-    #   prune: true
-    #   selfHeal: true
-    syncOptions:
-      - PrunePropagationPolicy=foreground
-      - PruneLast=true
+    automated:
+      prune: true
+      selfHeal: true
+    
     
