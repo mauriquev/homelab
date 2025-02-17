@@ -8,16 +8,23 @@ spec:
     namespace: monitoring 
     server: https://kubernetes.default.svc
   project: default
-  sources:
-    - repoURL: https://prometheus-community.github.io/helm-charts
-      targetRevision: 69.0.0
-      chart: kube-prometheus-stack
-      helm:
-        valueFiles:
-          - $values/monitoring/base/kube-prometheus-stack/values.yaml
-    - repoURL: https://github.com/mauriquev/homelab  # your repository
-      targetRevision: HEAD
-      ref: values
+  source:
+    chart: kube-prometheus-stack
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 69.0.0
+    helm:
+      values: |
+        grafana:
+          adminPassword: mauri
+          ingress:
+            enabled: true
+            ingressClassName: traefik
+            hosts: 
+              - grafana.maurihomelab.net
+            tls:
+              - secretName: grafana-tls-secret
+                hosts:
+                  - grafana.maurihomelab.net
   syncPolicy:
     automated:
       prune: true
