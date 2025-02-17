@@ -14,5 +14,6 @@ spec:
     namespace: kube-system
   syncPolicy:
     automated:
-      prune: false  # Be cautious with pruning for critical components
-      selfHeal: false
+      prune: true  # Be cautious with pruning for critical components
+      selfHeal: true
+    
