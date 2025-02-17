@@ -10,7 +10,6 @@ spec:
         revision: HEAD
         directories:
         - path: "infrastructure/staging/*"
-        - exclude: false
   template:
     metadata:
       name: 'infra-{{path.basename}}'
