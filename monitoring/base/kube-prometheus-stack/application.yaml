@@ -12,15 +12,18 @@ spec:
   project: default
   source:
     chart: kube-prometheus-stack
-    helm:
-      valueFiles:
-        - $values/values.yaml 
     repoURL: https://prometheus-community.github.io/helm-charts
     targetRevision: 69.0.0
+    helm:
+      valueFiles:
+        - $values/monitoring/base/kube-prometheus-stack/values.yaml
+    repoURL: https://github.com/mauriquev/homelab
+    targetRevision: HEAD
+    ref: values
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - PrunePropagationPolicy=foreground
-      - PruneLast=true
+    # syncOptions:
+    #   - PrunePropagationPolicy=foreground
+    #   - PruneLast=true
