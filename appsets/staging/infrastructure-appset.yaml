@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/your-org/your-repo
+        repoURL: https://github.com/mauriquev/homelab
         revision: HEAD
         directories:
         - path: "infrastructure/staging/*"
