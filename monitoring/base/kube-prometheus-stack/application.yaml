@@ -14,10 +14,9 @@ spec:
       chart: kube-prometheus-stack
       helm:
         valueFiles:
-          - $values/values.yaml
+          - $values/monitoring/base/kube-prometheus-stack/values.yaml
     - repoURL: https://github.com/mauriquev/homelab  # your repository
       targetRevision: HEAD
-      path: monitoring/base/kube-prometheus-stack
       ref: values
   syncPolicy:
     automated:
