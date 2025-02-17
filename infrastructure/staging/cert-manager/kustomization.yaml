@@ -4,4 +4,4 @@ resources:
   - ../../base/cert-manager  # Reference base configuration
   - clusterissuer.yaml
   - certificate.yaml
-  - cm-ca-secret.yaml
+  - sealed-cm-ca-secret.yaml

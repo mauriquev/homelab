@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: infrastructure-monitoring
+  name: staging-monitoring
   namespace: argocd
 spec:
   project: default
