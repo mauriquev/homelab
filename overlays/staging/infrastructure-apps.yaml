@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: staging-infrastructure
+  name: Infrastructure
   namespace: argocd
 spec:
   project: default
@@ -16,6 +16,4 @@ spec:
     automated:
       prune: true       
       selfHeal: true  
-    syncOptions:
-      - PrunePropagationPolicy=foreground
-      - PruneLast=true
+  

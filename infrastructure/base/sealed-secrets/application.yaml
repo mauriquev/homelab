@@ -14,11 +14,11 @@ spec:
     namespace: kube-system
   syncPolicy:
     automated:
-      prune: true  # Be cautious with pruning for critical components
+      prune: true  
       selfHeal: true
-  ignoreDifferences:
-    - group: "*"
-      kind: "*"
-      jqPathExpressions:
-        - .metadata.annotations
+  # ignoreDifferences:
+  #   - group: "*"
+  #     kind: "*"
+  #     jqPathExpressions:
+  #       - .metadata.annotations
     
