@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infrastructure
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/your-org/your-repo
+        revision: HEAD
+        directories:
+        - path: "infrastructure/staging/*"
+  template:
+    metadata:
+      name: 'infra-{{path.segment.2}}'
+    spec:
+      project: default
+      source:
+        repoURL: '{{repoURL}}'
+        targetRevision: '{{revision}}'
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.segment.2}}'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
