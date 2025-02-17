@@ -1,19 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: monitoring-test
+  name: monitoring-stack
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/mauriquev/homelab
-    targetRevision: main
+    repoURL: https://github.com/mauriquev/homelab  
+    targetRevision: HEAD
     path: monitoring/staging
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    # automated:
+    #   prune: true
+    #   selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
     
