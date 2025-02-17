@@ -1,15 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  labels:
-    app.kubernetes.io/instance: monitoring-stack
   name: kube-prometheus-stack
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "1"  # This helps control the order of synchronization
 spec:
   destination:
-    namespace: monitoring  # This is where the Prometheus resources will be deployed
+    namespace: monitoring 
     server: https://kubernetes.default.svc
   project: default
   source:
