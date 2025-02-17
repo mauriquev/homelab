@@ -11,7 +11,7 @@ spec:
     path: monitoring/staging
   destination:
     server: https://kubernetes.default.svc
-    namespace: monitoring
+    namespace: argocd
   syncPolicy:
     # automated:
     #   prune: true

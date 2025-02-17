@@ -1,20 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
+  labels:
+    app.kubernetes.io/instance: monitoring-stack
   name: kube-prometheus-stack
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"  # This helps control the order of synchronization
 spec:
+  destination:
+    namespace: monitoring  # This is where the Prometheus resources will be deployed
+    server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: https://prometheus-community.github.io/helm-charts
     chart: kube-prometheus-stack
-    targetRevision: "69.0.0"
     helm:
       valueFiles:
         - values.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: monitoring
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 69.0.0
   syncPolicy:
     automated:
       prune: true
@@ -22,4 +26,3 @@ spec:
     syncOptions:
       - PrunePropagationPolicy=foreground
       - PruneLast=true
-    
