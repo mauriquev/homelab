@@ -12,15 +12,13 @@ spec:
         - path: "infrastructure/staging/*"
   template:
     metadata:
-      name: 'infra-{{path.basename}}'
+      name: '{{path.basename}}'
     spec:
       project: default
       source:
         repoURL: '{{repoURL}}'
         targetRevision: '{{revision}}'
         path: '{{path}}'
-        directory:
-          recurse: true
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'

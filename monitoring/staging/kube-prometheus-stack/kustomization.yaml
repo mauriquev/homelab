@@ -2,4 +2,4 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - ../../base/kube-prometheus-stack/
-  - sealed-cm-ca-secret.yaml
+  - sealed-grafana-tls-secret.yaml
