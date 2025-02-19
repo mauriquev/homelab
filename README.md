@@ -16,7 +16,9 @@ The two most popular GitOps tools are Argo and Flux, they use git as a single so
 
 **Argo:**  Will try it out soon once initial cluster is setup 
 
+## Encrypting Secrets 
 
+As of now I decided to use Sealed Secrets for my secret manifest encryption. Its pretty straight forward and decryption is done my a controller within your own cluster.
 ## CI/CD
 
 ## Monitoring
