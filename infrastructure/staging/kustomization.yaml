@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
 - ./cert-manager
-- ../../infrastructure/base/sealed-secrets 
+# - ../../infrastructure/base/sealed-secrets 
