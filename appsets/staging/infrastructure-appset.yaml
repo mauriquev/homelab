@@ -24,6 +24,10 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{index .path.segments 2}}'
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true
+        - RespectIgnoreDifferences=true
       # Ignore Certificate status changes from cert-manager
       ignoreDifferences:
       - group: cert-manager.io
@@ -35,3 +39,15 @@ spec:
         kind: SealedSecret
         jsonPointers:
         - /status
+      # Ignore CustomResourceDefinition status changes
+      - group: apiextensions.k8s.io
+        kind: CustomResourceDefinition
+        jsonPointers:
+        - /spec/conversion
+        - /status
+      sourcePolicy:
+        resourceTrackingMethod: annotation+label
+      resourcePolicy:
+        managedNamespaceMetadata:
+          annotations:
+            argocd.argoproj.io/sync-wave: "-1"
