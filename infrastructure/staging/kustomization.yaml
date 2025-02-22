@@ -3,4 +3,3 @@ kind: Kustomization
 
 resources:
 - cert-manager
-- sealed-secrets
