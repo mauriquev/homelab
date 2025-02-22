@@ -13,3 +13,7 @@
 .env
 *.env
 .env.*
+
+# Ignore all charts directories and Chart.lock files
+**/charts/
+**/Chart.lock
