@@ -5,3 +5,4 @@ resources:
 - certificate.yaml
 - clusterissuer.yaml
 - sealed-cm-ca-secret.yaml
+- ../../base/cert-manager 
