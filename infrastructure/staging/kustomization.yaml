@@ -3,5 +3,4 @@ kind: Kustomization
 
 resources:
 - cert-manager
-- ../base/cert-manager
 - ../base/sealed-secrets
