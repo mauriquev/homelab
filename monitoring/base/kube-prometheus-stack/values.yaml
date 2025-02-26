@@ -11,3 +11,11 @@ grafana:
           - grafana.maurihomelab.net
 crds:
   create: true
+  keep: true
+
+prometheusOperator:
+  admissionWebhooks:
+    failurePolicy: Ignore
+    timeoutSeconds: 30
+  manageCRDs: true
+  createCustomResource: true
