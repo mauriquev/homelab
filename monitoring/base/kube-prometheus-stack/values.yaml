@@ -9,3 +9,5 @@ grafana:
       - secretName: grafana-tls
         hosts:
           - grafana.maurihomelab.net
+prometheusOperator:
+  createCustomResources: true
