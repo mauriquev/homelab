@@ -7,4 +7,3 @@ resources:
   - clusterissuer.yaml
   - sealed-cm-ca-secret.yaml
 
-namespace: cert-manager
