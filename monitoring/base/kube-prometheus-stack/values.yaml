@@ -1,0 +1,11 @@
+grafana:
+  adminPassword: mauri
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    hosts: 
+      - grafana.maurihomelab.net
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.maurihomelab.net
