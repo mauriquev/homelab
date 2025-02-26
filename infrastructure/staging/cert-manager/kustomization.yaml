@@ -8,3 +8,7 @@ resources:
   - clusterissuer.yaml
   - sealed-cm-ca-secret.yaml
 
+# Add annotations to all resources in this kustomization
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+
