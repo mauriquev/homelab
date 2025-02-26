@@ -14,3 +14,16 @@ helmCharts:
     namespace: monitoring
     valuesFile: values.yaml
 
+transformers:
+- |-
+  apiVersion: builtin
+  kind: PatchTransformer
+  metadata:
+    name: crd-sync-wave
+  patch: |-
+    - op: add
+      path: /metadata/annotations/argocd.argoproj.io~1sync-wave
+      value: "-5"
+  target:
+    kind: CustomResourceDefinition
+
