@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infrastructure
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/mauriquev/homelab
+        revision: HEAD
+        directories:
+          - path: "infrastructure/staging/*"
+  template:
+    metadata:
+      name: '{{.path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/mauriquev/homelab
+        targetRevision: HEAD
+        path: '{{.path.path}}'
+        kustomize: {}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ if eq .path.basename "sealed-secrets" }}kube-system{{ else }}{{.path.basename}}{{ end }}'
+      
