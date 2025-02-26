@@ -4,4 +4,4 @@ metadata:
   name: cert-manager-clusterissuer
 spec:
   ca:
-    secretName: sealed-cm-ca-secret
+    secretName: sealed-cm-ca
