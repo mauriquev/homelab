@@ -3,7 +3,9 @@ kind: Kustomization
 resources:
   - ../../base/kube-prometheus-stack
   - certificate.yaml
-
+commonAnnotations:
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  
 patches:
   - patch: |
       apiVersion: apiextensions.k8s.io/v1
