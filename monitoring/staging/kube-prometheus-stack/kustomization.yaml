@@ -17,8 +17,7 @@ patches:
     target:
       kind: CustomResourceDefinition
       name: prometheusagents.monitoring.coreos.com
-
-  patches:
+      
   - patch: |
       apiVersion: rbac.authorization.k8s.io/v1
       kind: ClusterRole
