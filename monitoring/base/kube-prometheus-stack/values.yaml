@@ -9,19 +9,3 @@ grafana:
       - secretName: grafana-tls
         hosts:
           - grafana.maurihomelab.net
-# crds:
-#   create: true
-#   # keep: true
-# prometheus-node-exporter:
-#   hostRootFsMount:
-#     enabled: false
-
-# prometheusOperator:
-#   admissionWebhooks:
-#     failurePolicy: Ignore
-# prometheusOperator:
-#   admissionWebhooks:
-#     failurePolicy: Ignore
-#     timeoutSeconds: 30
-#   manageCRDs: true
-#   createCustomResource: true

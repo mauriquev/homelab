@@ -1,14 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: monitoring
-
 resources:
 - namespace.yaml
-
-# Using remote bases to fetch the CRDs first
-bases:
-- https://github.com/prometheus-community/helm-charts//charts/kube-prometheus-stack/crds?ref=kube-prometheus-stack-69.5.2
 
 helmCharts:
 - name: kube-prometheus-stack
@@ -16,5 +10,17 @@ helmCharts:
   namespace: monitoring
   version: 69.5.2
   repo: https://prometheus-community.github.io/helm-charts
-  includeCRDs: false  # Keep this false to avoid conflicts
+  includeCRDs: true
   valuesFile: values.yaml
+
+
+patchesJson6902:
+- target:
+    group: apiextensions.k8s.io
+    version: v1
+    kind: CustomResourceDefinition
+    name: prometheuses.monitoring.coreos.com
+  patch: |-
+    - op: add
+      path: "/metadata/annotations/argocd.argoproj.io~1sync-options"
+      value: "Replace=true"
