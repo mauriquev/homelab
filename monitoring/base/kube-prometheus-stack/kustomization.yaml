@@ -1,9 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: monitoring
 
 resources:
 - namespace.yaml
+
+# Using remote bases to fetch the CRDs first
+bases:
+- https://github.com/prometheus-community/helm-charts//charts/kube-prometheus-stack/crds?ref=kube-prometheus-stack-69.5.2
 
 helmCharts:
 - name: kube-prometheus-stack
@@ -11,9 +16,5 @@ helmCharts:
   namespace: monitoring
   version: 69.5.2
   repo: https://prometheus-community.github.io/helm-charts
-  includeCRDs: true  # Make sure this is set to true
+  includeCRDs: false  # Keep this false to avoid conflicts
   valuesFile: values.yaml
-
-# Add global annotations to all resources
-# commonAnnotations:
-#   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
