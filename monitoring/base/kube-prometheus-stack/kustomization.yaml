@@ -15,5 +15,5 @@ helmCharts:
   valuesFile: values.yaml
 
 # Add global annotations to all resources
-commonAnnotations:
-  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+# commonAnnotations:
+#   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
