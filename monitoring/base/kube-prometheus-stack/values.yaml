@@ -11,11 +11,17 @@ grafana:
           - grafana.maurihomelab.net
 crds:
   create: true
-  keep: true
+  # keep: true
+prometheus-node-exporter:
+  hostRootFsMount:
+    enabled: false
 
 prometheusOperator:
   admissionWebhooks:
     failurePolicy: Ignore
-    timeoutSeconds: 30
-  manageCRDs: true
-  createCustomResource: true
+# prometheusOperator:
+#   admissionWebhooks:
+#     failurePolicy: Ignore
+#     timeoutSeconds: 30
+#   manageCRDs: true
+#   createCustomResource: true
