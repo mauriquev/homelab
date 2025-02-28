@@ -1,11 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
-
 resources:
   - ../../base/kube-prometheus-stack
   - certificate.yaml
-
 commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true,PruneLast=true
 
@@ -27,14 +24,14 @@ patches:
         path: /metadata/annotations/argocd.argoproj.io~1sync-options
         value: ServerSideApply=true
   
-  # RBAC resources with conflict issues
+  # RBAC resources with conflict issues - using ServerSideApply
   - target:
       kind: ClusterRole
       name: kube-prometheus-stack-admission
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-options
-        value: ServerSideApply=true
+        value: ServerSideApply=true,Replace=true
 
   - target:
       kind: ClusterRoleBinding
@@ -42,7 +39,7 @@ patches:
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-options
-        value: ServerSideApply=true
+        value: ServerSideApply=true,Replace=true
 
   - target:
       kind: Role
@@ -51,7 +48,7 @@ patches:
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-options
-        value: ServerSideApply=true
+        value: ServerSideApply=true,Replace=true
 
   - target:
       kind: RoleBinding
@@ -60,7 +57,7 @@ patches:
     patch: |-
       - op: add
         path: /metadata/annotations/argocd.argoproj.io~1sync-options
-        value: ServerSideApply=true
+        value: ServerSideApply=true,Replace=true
       
   # Handle the webhook related resources
   - target:
