@@ -1,61 +1,72 @@
+# staging/linkding/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: linkding
-resources:
-  - ../../base/linkding/
-  - cloudflare.yaml
-  - sealed-cloudflare-secret.yaml
-  - sealed-linkding-env-secret.yaml
 
-  # Use patches to apply sync-wave annotations to specific resources
+namespace: linkding
+
+resources:
+- ../../base/linkding
+- cloudflare.yaml
+- sealed-cloudflare-secret.yaml
+- sealed-linkding-env-secret.yaml
+
 patches:
-  - patch: |-
+  # Wave 0: Namespace first
+  - patch: |
       apiVersion: v1
       kind: Namespace
       metadata:
         name: linkding
         annotations:
-          argocd.argoproj.io/sync-wave: "-3"
+          argocd.argoproj.io/sync-wave: "0"
     target:
       kind: Namespace
       name: linkding
 
-  - patch: |-
-      apiVersion: bitnami.com/v1alpha1
-      kind: SealedSecret
+  # Wave 1: ConfigMaps and Secrets
+  - patch: |
+      apiVersion: v1
+      kind: ConfigMap
       metadata:
         annotations:
-          argocd.argoproj.io/sync-wave: "-2"
+          argocd.argoproj.io/sync-wave: "1"
     target:
-      kind: SealedSecret
+      kind: ConfigMap
 
-  - patch: |-
+  - patch: |
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "1"
+    target:
+      kind: Secret
+
+  # Wave 2: PVCs
+  - patch: |
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "2"
+    target:
+      kind: PersistentVolumeClaim
+
+  # Wave 3: Deployments and Services
+  - patch: |
       apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: linkding
         annotations:
-          argocd.argoproj.io/sync-wave: "-1"
+          argocd.argoproj.io/sync-wave: "3"
     target:
       kind: Deployment
-      name: linkding
 
-  - patch: |-
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: cloudflared
-        annotations:
-          argocd.argoproj.io/sync-wave: "0"
-    target:
-      kind: Deployment
-      name: cloudflared
-
-  - patch: |-
+  - patch: |
       apiVersion: v1
       kind: Service
       metadata:
         annotations:
-          argocd.argoproj.io/sync-wave: "0"
+          argocd.argoproj.io/sync-wave: "3"
     target:
       kind: Service
