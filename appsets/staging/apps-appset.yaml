@@ -4,24 +4,28 @@ metadata:
   name: apps
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - git:
-        repoURL: 'https://github.com/mauriquev/homelab'
+        repoURL: https://github.com/mauriquev/homelab
         revision: HEAD
         directories:
-          - path: 'apps/base/linkding'
-          - path: 'apps/staging/linkding'
+          - path: "apps/staging/*"
   template:
     metadata:
-      name: '{{path.basename}}-app'
+      name: '{{.path.basename}}'
     spec:
       project: default
       source:
-        repoURL: 'https://github.com/mauriquev/homelab'
+        repoURL: https://github.com/mauriquev/homelab
         targetRevision: HEAD
-        path: '{{path}}'  # Reference the path in the repo (base or staging)
+        path: '{{.path.path}}'
+        kustomize: {}
       destination:
-        server: 'https://kubernetes.default.svc'
-        namespace: '{{path.basename}}'  # Use the app name for the namespace
-
-      
+        server: https://kubernetes.default.svc
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
