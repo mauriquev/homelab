@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: 'https://github.com/mauriquev/homelab'
+        revision: HEAD
+        directories:
+          - path: 'apps/base/linkding'
+          - path: 'apps/staging/linkding'
+  template:
+    metadata:
+      name: '{{path.basename}}-app'
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/mauriquev/homelab'
+        targetRevision: HEAD
+        path: '{{path}}'  # Reference the path in the repo (base or staging)
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{path.basename}}'  # Use the app name for the namespace
+
+      
