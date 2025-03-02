@@ -63,6 +63,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cloudflared
+  namespace: linkding
 data:
   config.yaml: |
     # Name of the tunnel you want to run
