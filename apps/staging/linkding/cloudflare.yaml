@@ -66,7 +66,6 @@ metadata:
 data:
   config.yaml: |
     # Name of the tunnel you want to run
-    
     tunnel: linkding
 
     credentials-file: /etc/cloudflared/creds/credentials.json
@@ -76,13 +75,13 @@ data:
     no-autoupdate: true
 
     ingress:
-    - hostname: linkding.maurihomelab.net
-      service: http://linkding:9090
+      - hostname: linkding.maurihomelab.net
+        service: http://linkding:9090
 
-    # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
-    # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
-    # in the connection from cloudflared to your local service, not from the internet to cloudflared.
-    - hostname: hello.example.com
-      service: hello_world
-    # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
-    - service: http_status:404
+      # This rule sends traffic to the built-in hello-world HTTP server. This can help debug connectivity
+      # issues. If hello.example.com resolves and tunnel.example.com does not, then the problem is
+      # in the connection from cloudflared to your local service, not from the internet to cloudflared.
+      - hostname: hello.example.com
+        service: hello_world
+      # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
+      - service: http_status:404
