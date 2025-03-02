@@ -6,3 +6,56 @@ resources:
   - cloudflare.yaml
   - sealed-cloudflare-secret.yaml
   - sealed-linkding-env-secret.yaml
+
+  # Use patches to apply sync-wave annotations to specific resources
+patches:
+  - patch: |-
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: linkding
+        annotations:
+          argocd.argoproj.io/sync-wave: "-3"
+    target:
+      kind: Namespace
+      name: linkding
+
+  - patch: |-
+      apiVersion: bitnami.com/v1alpha1
+      kind: SealedSecret
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "-2"
+    target:
+      kind: SealedSecret
+
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: linkding
+        annotations:
+          argocd.argoproj.io/sync-wave: "-1"
+    target:
+      kind: Deployment
+      name: linkding
+
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: cloudflared
+        annotations:
+          argocd.argoproj.io/sync-wave: "0"
+    target:
+      kind: Deployment
+      name: cloudflared
+
+  - patch: |-
+      apiVersion: v1
+      kind: Service
+      metadata:
+        annotations:
+          argocd.argoproj.io/sync-wave: "0"
+    target:
+      kind: Service
