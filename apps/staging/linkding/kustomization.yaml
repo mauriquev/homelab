@@ -10,63 +10,38 @@ resources:
 - sealed-cloudflare-secret.yaml
 - sealed-linkding-env-secret.yaml
 
-patches:
-  # Wave 0: Namespace first
-  - patch: |
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: linkding
-        annotations:
-          argocd.argoproj.io/sync-wave: "0"
-    target:
-      kind: Namespace
-      name: linkding
-
-  # Wave 1: ConfigMaps and Secrets
-  - patch: |
-      apiVersion: v1
-      kind: ConfigMap
-      metadata:
-        annotations:
-          argocd.argoproj.io/sync-wave: "1"
-    target:
-      kind: ConfigMap
-
-  - patch: |
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        annotations:
-          argocd.argoproj.io/sync-wave: "1"
-    target:
-      kind: Secret
-
-  # Wave 2: PVCs
-  - patch: |
-      apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        annotations:
-          argocd.argoproj.io/sync-wave: "2"
-    target:
-      kind: PersistentVolumeClaim
-
-  # Wave 3: Deployments and Services
-  - patch: |
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        annotations:
-          argocd.argoproj.io/sync-wave: "3"
-    target:
-      kind: Deployment
-
-  - patch: |
-      apiVersion: v1
-      kind: Service
-      metadata:
-        annotations:
-          argocd.argoproj.io/sync-wave: "3"
-    target:
-      kind: Service
+# Add transformers to add sync waves to specific resources
+transformers:
+- |-
+  apiVersion: builtin
+  kind: AnnotationsTransformer
+  metadata:
+    name: add-namespace-syncwave
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  fieldSpecs:
+  - path: metadata/annotations
+    create: true
+    kind: Namespace
+- |-
+  apiVersion: builtin
+  kind: AnnotationsTransformer
+  metadata:
+    name: add-configmap-syncwave
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+  fieldSpecs:
+  - path: metadata/annotations
+    create: true
+    kind: ConfigMap
+- |-
+  apiVersion: builtin
+  kind: AnnotationsTransformer
+  metadata:
+    name: add-deployment-syncwave
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  fieldSpecs:
+  - path: metadata/annotations
+    create: true
+    kind: Deployment
