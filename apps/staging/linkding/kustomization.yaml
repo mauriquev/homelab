@@ -9,5 +9,4 @@ resources:
 - cloudflare.yaml
 - sealed-cloudflare-secret.yaml
 - sealed-linkding-env-secret.yaml
-- configmap.yaml
 
