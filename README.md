@@ -4,7 +4,7 @@
 
 This repository is for my K8s bare metal homelab cluster. I will document the tools and technologies I use as I build an environment to hone and master my cloud/DevOps skills. I designed this project to be a place where I can grow, while also evolving with me as I dive deeper into the Kubernetes, Cloud, DevOps and Microservices.
 
-i plan on following  ‘The Twelve-Factor App’ principles and GitOps fundamentals.
+I plan on following  ‘The Twelve-Factor App’ principles and GitOps fundamentals.
 
 ## Hardware and Kubernetes Distribution
 
