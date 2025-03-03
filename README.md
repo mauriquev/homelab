@@ -1,24 +1,41 @@
-# K8s Homelab 
+# README
 
-This repository is for my k8s Homelab cluster. I wil be following ‘The Twelve-Factor App’ principles and GitOps fundemantals.
+## Introduction
 
-**Goal:** Create a production level cluster that enables me to explore and utilize DevOps tools and technologies while following best practices.
-## Distribution 
-- k3s lightweight disro on a raspberry pi5.
-- Pi5 has limited compute so the distribution meets my needs 
+This repository is for my K8s bare metal homelab cluster. I will document the tools and technologies I use as I build an environment to hone and master my cloud/DevOps skills. I designed this project to be a place where I can grow, while also evolving with me as I dive deeper into the Kubernetes, Cloud, DevOps and Microservices.
 
+i plan on following  ‘The Twelve-Factor App’ principles and GitOps fundamentals.
+
+## Hardware and Kubernetes Distribution
+
+I  wanted something that was power efficient and small, so I opted for the Raspberry Pi 5. I also am using an SSD as I wanted a safer storage option than microSD cards.
+
+### Hardware:
+
+- Raspberry Pi 5
+- 256 GB SSD (x2)
+- Official Raspberry Pi 5 M.2 HAT (x2)
+
+| Node | Usage | Hardware |
+| --- | --- | --- |
+| Midas | Control-Plane | Raspberry Pi 5 (8GB) |
+| Orpheus | Worker  | Raspberry Pi 5 (8GB) |
+| TBA | TBA |  |
+
+I am using K3s as my Kubernetes distribution. It works well with ARM and it's lightweight, making it perfect for Pi 5 with its limited resources.
 
 ## GitOps
 
-The two most popular GitOps tools are Argo and Flux, they use git as a single source of truth. I will be testing both tools and see which one meets my needs the best. 
+The two most popular GitOps tools are Argo and Flux. They use Git as a single source of truth. I will be testing both tools and see which one meets my needs the best.
 
-**Flux:** Currently the GitOps tool that I am using to manage and deploy my current cluster k8s objects. I am following the monorepo structure.
+**~~Flux:~~**
 
-**Argo:**  Will try it out soon once initial cluster is setup 
+- ~~Currently the GitOps tool that I am using to manage and deploy my current cluster's K8s objects. I am following the monorepo structure.~~
 
-## Encrypting Secrets 
+**Argo:**
 
-As of now I decided to use Sealed Secrets for my secret manifest encryption. Its pretty straight forward and decryption is done my a controller within your own cluster.
+- Now my primary GitOps tool going forward.
+
 ## CI/CD
 
 ## Monitoring
