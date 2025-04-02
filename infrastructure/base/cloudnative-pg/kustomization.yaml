@@ -5,6 +5,7 @@ namespace: cnpg-system
 
 resources:
   - namespace.yaml
+  - cloudnative-pg-namespace.yaml
 
 helmCharts:
   - name: cloudnative-pg
@@ -12,27 +13,4 @@ helmCharts:
     version: 0.23.2
     releaseName: cnpg
     namespace: cnpg-system
-    includeCRDs: true
-
-# Patches to fix namespace references in RBAC resources
-patchesJson6902:
-  - target:
-      group: rbac.authorization.k8s.io
-      version: v1
-      kind: ClusterRoleBinding
-      name: cnpg-cloudnative-pg
-    patch: |-
-      - op: replace
-        path: /subjects/0/namespace
-        value: cnpg-system
-
-  - target:
-      group: rbac.authorization.k8s.io
-      version: v1
-      kind: ClusterRoleBinding
-      name: cnpg-cloudnative-pg-metrics
-    patch: |-
-      - op: replace
-        path: /subjects/0/namespace
-        value: cnpg-system
-        
+  
