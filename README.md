@@ -37,5 +37,7 @@ The two most popular GitOps tools are Argo and Flux. They use Git as a single so
 - Now my primary GitOps tool going forward.
 
 ## CI/CD
+- For my current projects, I am using GitHub Actions as my primary CI/CD tool. the CD is moslty handled by Argo ans CI by Actions
 
 ## Monitoring
+- For monitoring and metrics I opted for kube-prometheus HA inside my cluster. This provides me with cluster metrics and the ability to create custom dashboards.
